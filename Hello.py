@@ -14,10 +14,20 @@
 
 import streamlit as st
 from streamlit.logger import get_logger
-from classes.queryParams import queryParams
+from classes.queryParams import params
+import jose.jwt as jwt
+import time
+import fastapi
+import uvicorn
 
 LOGGER = get_logger(__name__)
 
+app = fastapi.FastAPI()
+
+@app.get("/oauth")
+async def saveToken(code : str):
+  params.token = code
+  return
 
 def run():
     st.set_page_config(
@@ -26,10 +36,12 @@ def run():
     )
 
     st.write("# Welcome to Streamlit! 👋")
-    print(st.experimental_get_query_params())
-    #params = queryParams()
-    #params.model_validate(st.experimental_get_query_params())
-    st.write(st.experimental_get_query_params())
+    try:
+      params.initialAppURL = st.experimental_get_query_params()["initialAppURL"][0]
+    except KeyError:
+      pass
+    key = str(time.time())
+    params.state = jwt.encode({"initialAppURL" : params.initialAppURL}, key)
     st.sidebar.success("Select a demo above.")
 
     st.markdown(
@@ -53,3 +65,4 @@ def run():
 
 if __name__ == "__main__":
     run()
+    uvicorn.run("Hello:app", port=8000)
