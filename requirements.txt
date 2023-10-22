@@ -6,4 +6,3 @@ streamlit
 fastapi
 pydantic
 python-jose[cryptography]
-uvicorn

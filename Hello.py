@@ -17,17 +17,12 @@ from streamlit.logger import get_logger
 from classes.queryParams import params
 import jose.jwt as jwt
 import time
-import fastapi
-import uvicorn
+#import fastapi
+#import uvicorn
 
 LOGGER = get_logger(__name__)
 
-app = fastapi.FastAPI()
-
-@app.get("/oauth")
-async def saveToken(code : str):
-  params.token = code
-  return
+#app = fastapi.FastAPI()
 
 def run():
     st.set_page_config(
@@ -65,4 +60,4 @@ def run():
 
 if __name__ == "__main__":
     run()
-    uvicorn.run("Hello:app", port=8000)
+    #uvicorn.run("Hello:app", port=8000, host="172.16.5.4")
