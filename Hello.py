@@ -14,6 +14,7 @@
 
 import streamlit as st
 from streamlit.logger import get_logger
+from classes.queryParams import queryParams
 
 LOGGER = get_logger(__name__)
 
@@ -25,7 +26,10 @@ def run():
     )
 
     st.write("# Welcome to Streamlit! 👋")
-
+    print(st.experimental_get_query_params())
+    #params = queryParams()
+    #params.model_validate(st.experimental_get_query_params())
+    st.write(st.experimental_get_query_params())
     st.sidebar.success("Select a demo above.")
 
     st.markdown(
