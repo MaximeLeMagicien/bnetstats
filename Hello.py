@@ -38,7 +38,7 @@ def run():
       pass
     st.write(f"token : {params.token}")
     redirect = params.initialAppURL+"api/code"
-    params.state = jwt.encode({"initialAppURL" : redirect, "initalTime" : str(params.token)}, key=KEY, algorithm='HS256')
+    params.state = jwt.encode({"initialAppURL" : redirect, "initialTime" : str(params.token)}, key=KEY, algorithm='HS256')
     st.sidebar.success("Select a demo above.")
 
     st.markdown(
