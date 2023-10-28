@@ -16,7 +16,6 @@ import streamlit as st
 from streamlit.logger import get_logger
 from classes.queryParams import params
 import jose.jwt as jwt
-import time
 #import fastapi
 #import uvicorn
 
@@ -38,7 +37,7 @@ def run():
     except KeyError:
       pass
     
-    params.state = jwt.encode({"initialAppURL" : params.initialAppURL+"api/code", "initalTime" : params.token}, key=KEY)
+    params.state = jwt.encode({"initialAppURL" : params.initialAppURL+"api/code", "initalTime" : str(params.token)}, key=KEY)
     st.sidebar.success("Select a demo above.")
 
     st.markdown(
