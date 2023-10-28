@@ -36,6 +36,7 @@ def run():
       params.token = jwt.decode(params.sessionKey, key=KEY, algorithms='HS256')["initialTime"]
     except KeyError:
       pass
+    st.write(params.token)
     redirect = params.initialAppURL+"api/code"
     params.state = jwt.encode({"initialAppURL" : redirect, "initalTime" : str(params.token)}, key=KEY, algorithm='HS256')
     st.sidebar.success("Select a demo above.")
