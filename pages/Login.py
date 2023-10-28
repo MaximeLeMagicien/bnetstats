@@ -1,6 +1,6 @@
 import streamlit as st
 from Hello import params
-import webbrowser, requests
+import requests
 from streamlit_javascript import st_javascript
 
 

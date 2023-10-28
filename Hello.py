@@ -21,7 +21,7 @@ import time
 #import uvicorn
 
 LOGGER = get_logger(__name__)
-
+KEY = "$2y$10$JBZsW3Td414dxemijbOinum8Eb.EJYfZdC3ZTyhVELQNr4OtJpLpe"
 #app = fastapi.FastAPI()
 
 def run():
@@ -33,10 +33,12 @@ def run():
     st.write("# Welcome to Streamlit! 👋")
     try:
       params.initialAppURL = st.experimental_get_query_params()["initialAppURL"][0]
+      params.sessionKey = st.experimental_get_query_params()["sessionKey"][0]
+      params.token = jwt.decode(params.sessionKey, key=KEY, algorithms='HS256')["initialTime"]
     except KeyError:
       pass
-    key = str(time.time())
-    params.state = jwt.encode({"initialAppURL" : params.initialAppURL}, key)
+    
+    params.state = jwt.encode({"initialAppURL" : params.initialAppURL+"api/code", "initalTime" : params.token}, key=KEY)
     st.sidebar.success("Select a demo above.")
 
     st.markdown(
