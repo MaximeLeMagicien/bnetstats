@@ -37,7 +37,7 @@ def run():
     except KeyError:
       pass
     
-    params.state = jwt.encode({"initialAppURL" : params.initialAppURL+"api/code", "initalTime" : str(params.token)}, key=KEY)
+    params.state = jwt.encode({"initialAppURL" : params.initialAppURL+"api/code", "initalTime" : str(params.token)}, key=KEY, algorithm='HS256')
     st.sidebar.success("Select a demo above.")
 
     st.markdown(
