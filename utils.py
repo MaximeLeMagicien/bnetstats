@@ -14,7 +14,7 @@
 
 import inspect
 import textwrap
-
+from streamlit_javascript import st_javascript
 import streamlit as st
 
 
@@ -26,3 +26,7 @@ def show_code(demo):
         st.markdown("## Code")
         sourcelines, _ = inspect.getsourcelines(demo)
         st.code(textwrap.dedent("".join(sourcelines[1:])))
+
+def openURL(url : str):
+    js = f'window.open("{url}", "_blank").then(r => window.parent.location.href);'
+    st_javascript(js)

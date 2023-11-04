@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 class queryParams(BaseModel):
-    initialAppURL : str = "http://127.0.0.1:4200/"
+    initialAppURL : str = "https://battlenetstats-1-c8631078.deta.app/"
     sessionKey : str = ""
     state : str = ""
     token : str = ""
